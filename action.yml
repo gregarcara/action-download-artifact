@@ -17,6 +17,10 @@ inputs:
     description: Where to unpack the artifact
     required: false
     default: "./"
+  repo:
+    description: Repository name with owner (like actions/checkout)
+    required: false
+    default: ${{ github.repository }}
 outputs:
   error_message:
     description: The error message, if an error occurs
