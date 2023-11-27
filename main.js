@@ -29,7 +29,7 @@ async function main() {
 	  return setExitMessage("fail", "no downloadable artifacts found")
 	}
 
-	core.info(artifacts)
+	core.info(JSON.stringify(artifacts))
 
 	artifact = artifacts.artifacts[0]
 
