@@ -19,19 +19,19 @@ async function main() {
 	core.info(`==> Artifact name: ${name}`)
 	core.info(`==> Local path: ${path}`)
 
-	const artifacts = await client.rest.actions.listArtifactsForRepo({
+	const ar = await client.rest.actions.listArtifactsForRepo({
 	  owner,
 	  repo,
 	  name,
 	})
 
-	if(!artifacts || artifacts.total_count === 0) {
+	if(!ar.data || ar.data.total_count === 0) {
 	  return setExitMessage("fail", "no downloadable artifacts found")
 	}
 
-	core.info(JSON.stringify(artifacts))
+	core.info(JSON.stringify(ar.data))
 
-	artifact = artifacts.artifacts[0]
+	artifact = ar.data.artifacts[0]
 
 	try {
 	  zip = await client.rest.actions.downloadArtifact({
