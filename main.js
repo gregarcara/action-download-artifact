@@ -19,7 +19,7 @@ async function main() {
 	core.info(`==> Artifact name: ${name}`)
 	core.info(`==> Local path: ${path}`)
 
-	const ar = await client.rest.actions.listArtifactsForRepo({
+	let ar = await client.rest.actions.listArtifactsForRepo({
 	  owner,
 	  repo,
 	  name,
@@ -29,15 +29,13 @@ async function main() {
 	  return setExitMessage("fail", "no downloadable artifacts found")
 	}
 
-	core.info(JSON.stringify(ar.data))
-
-	artifact = ar.data.artifacts[0]
+	ar = ar.data.artifacts[0]
 
 	try {
 	  zip = await client.rest.actions.downloadArtifact({
 		owner: owner,
 		repo: repo,
-		artifact_id: artifact.id,
+		artifact_id: ar.id,
 		archive_format: "zip",
 	  })
 	} catch (error) {
@@ -54,7 +52,7 @@ async function main() {
 
 	const adm = new AdmZip(Buffer.from(zip.data))
 
-	core.startGroup(`==> Extracting: ${artifact.name}.zip`)
+	core.startGroup(`==> Extracting: ${ar.name}.zip`)
 	adm.getEntries().forEach((entry) => {
 	  const action = entry.isDirectory ? "creating" : "inflating"
 	  const filepath = pathname.join(dir, entry.entryName)
