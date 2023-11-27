@@ -1,0 +1,28 @@
+name: Download workflow artifact
+description: Download and extract an artifact by name
+author: gregarcara
+branding:
+  icon: download
+  color: blue
+inputs:
+  github_token:
+    description: GitHub token
+    required: false
+    default: ${{ github.token }}
+    required: false
+  name:
+    description: Artifact name (download all artifacts if not specified)
+    required: true
+    default: fail
+  path:
+    description: Where to unpack the artifact
+    required: false
+    default: "./"
+outputs:
+  error_message:
+    description: The error message, if an error occurs
+  found_artifact:
+    description: Boolean output which is true if the artifact was found and false otherwise
+runs:
+  using: node16
+  main: main.js
