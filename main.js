@@ -19,7 +19,7 @@ async function main() {
 	core.info(`==> Artifact name: ${name}`)
 	core.info(`==> Local path: ${path}`)
 
-	const artifacts = client.rest.actions.listArtifactsForRepo({
+	const artifacts = await client.rest.actions.listArtifactsForRepo({
 	  owner,
 	  repo,
 	  name,
