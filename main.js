@@ -29,6 +29,8 @@ async function main() {
 	  return setExitMessage("fail", "no downloadable artifacts found")
 	}
 
+	core.info(artifacts)
+
 	artifact = artifacts.artifacts[0]
 
 	try {
