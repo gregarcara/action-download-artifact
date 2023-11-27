@@ -9,6 +9,7 @@ const fs = require('fs')
 async function main() {
   try {
 	const token = core.getInput("github_token", { required: true })
+	const [owner, repo] = core.getInput("repo", { required: true }).split("/")	
 	const name = core.getInput("name", { required: true})
 	const path = core.getInput("path", { required: true })
 
