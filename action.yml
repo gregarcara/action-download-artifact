@@ -9,7 +9,6 @@ inputs:
     description: GitHub token
     required: false
     default: ${{ github.token }}
-    required: false
   name:
     description: Artifact name (download all artifacts if not specified)
     required: true
